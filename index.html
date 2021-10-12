@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+            margin: 30px;
+        }
+        .product{
+            margin: 15px;
+            padding: 15px;
+            border: 1px double black;
+        }
+        .container div:first-child{
+            border: 5px double red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Описать класс продукт (url-фото, имя, категория, цена и вес). И создать коллекцию на 12 продуктов.
+    Вывести в виде карточек 5 товаров на страницу, выделив первый (через css и :first) -->
+
+    <!-- Я так понял перелистывания тут делать не надо, только 5 товаров вывести и все. -->
+
+    <div id="app"></div>
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Product{
+            constructor(item){
+                this.url_photo = item[0]
+                this.name = item[1]
+                this.category = item[2]
+                this.price = item[3]
+                this.weight = item[4]
+            }
+        }
+
+        class ShowCards extends React.Component{
+
+            constructor(props){
+                super(props);
+                this.state = props;
+            }
+            
+            render(){
+                return <div class="container">
+                    {this.state.products.map((element, i) => (
+                        <div id={"id_" + i} class='product'>
+                            <img src={element.url_photo}/>
+                            <p class='name'>name: {element.name}</p>
+                            <p class='category'>category: {element.category}</p>
+                            <p class='price'>price: {element.price}</p>
+                            <p class='weight'>weight: {element.weight}</p>
+                        </div>)
+                    ).slice(0, 5)}
+                </div>;
+            }
+        }
+
+        const products = [
+            new Product(['image\\products\\1.png', 'name_1', 'category_1', 'price_1', 'weight_1']),
+            new Product(['image\\products\\2.png', 'name_2', 'category_2', 'price_2', 'weight_2']),
+            new Product(['image\\products\\3.png', 'name_3', 'category_3', 'price_3', 'weight_3']),
+            new Product(['image\\products\\4.png', 'name_4', 'category_4', 'price_4', 'weight_4']),
+            new Product(['image\\products\\5.png', 'name_5', 'category_5', 'price_5', 'weight_5']),
+            new Product(['image\\products\\6.png', 'name_6', 'category_6', 'price_6', 'weight_6']),
+            new Product(['image\\products\\7.png', 'name_7', 'category', 'price', 'weight']),
+            new Product(['image\\products\\8.png', 'name_8', 'category', 'price', 'weight']),
+            new Product(['image\\products\\9.png', 'name_9', 'category', 'price', 'weight']),
+            new Product(['image\\products\\10.png', 'name_10', 'category', 'price', 'weight']),
+            new Product(['image\\products\\11.png', 'name_11', 'category', 'price', 'weight']),
+            new Product(['image\\products\\12.png', 'name_12', 'category', 'price', 'weight']),
+        ];
+
+        ReactDOM.render(
+            <ShowCards products={products} />,
+            document.getElementById('app')
+        );
+    </script>
+
+</body>
+</html>
